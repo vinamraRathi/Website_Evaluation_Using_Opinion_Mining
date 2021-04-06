@@ -1,0 +1,19 @@
+a{
+    text-decoration: none;
+    color: red;
+}
+
+li.li-border{
+    border: 2px solid aqua;
+    padding: 10px;
+
+    margin: 15px;
+    display: block;
+}
+
+button.nohover{
+    width: 100px;
+}
+button.btn-outline-info:hover{
+    background-color: transparent;
+}

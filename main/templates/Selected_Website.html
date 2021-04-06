@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+    <br>
+    <br>
+    <h3>
+        <a href="{{ post.website_url }}"> {{ post.website_url }} </a>
+        <br>
+        <br>
+        By {{ post.author }} <br> <br>
+        Created on {{ post.date }} <br>
+    </h3>
+    <br>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <button type="button" class="btn btn-outline-info nohover">
+                <a class="nohover" href="{% url 'Update-Website' post.slug post.pk %}">Edit</a>
+            </button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-outline-info nohover">
+                <a class="nohover" href="{% url 'Delete-Website' post.slug post.pk %}">Delete</a>
+            </button>
+            <br>
+        {% endif %}
+    {% else %}
+        <h1>Error:404 Not Found! Please Log In</h1>
+    {% endif %}
+    <br>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Post</h1>
+<br>
+<ul>
+    {% for post in object_list %}
+    <li class="li-border">
+    <a href="{% url 'Selected-Website' post.slug post.pk %}"> {{ post.title }} </a> <br>
+    By {{ post.author }} <br>
+    On {{ post.date }} <br>
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <button type="button" class="btn btn-outline-info nohover">
+                <a class="nohover" href="{% url 'Update-Website' post.slug post.pk %}">Edit</a>
+                </button>
+                <button type="button" class="btn btn-outline-info nohover">
+                <a class="nohover" href="{% url 'Delete-Website' post.slug post.pk %}">Delete</a>
+                </button>
+            {% endif %}
+    {% endif %}
+    <br>
+    <br>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

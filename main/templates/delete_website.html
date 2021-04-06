@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <h1>Delete Website</h1>
+            <br>
+            <h3>Delete: {{ post.title }}</h3>
+            <br>
+            <div class="form-group">
+            <form method="post">
+                {% csrf_token %}
+                <strong>Are you sure</strong>
+                <br>
+                <button class="btn btn-secondary">Delete</button>
+            </form>
+            </div>
+        {% else %}
+        <h1>Error:404 Not Found! Please Log In with Correct User</h1>
+        {% endif %}
+     {% else %}
+        <h1>Error:404 Not Found! Please Log In</h1>
+    {% endif %}
+{% endblock %}
