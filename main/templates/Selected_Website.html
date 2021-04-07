@@ -25,6 +25,26 @@
     {% else %}
         <h1>Error:404 Not Found! Please Log In</h1>
     {% endif %}
+    <hr>
+    <br>
+    <h2>Comments...</h2>
+    {% if not post.comments.all %}
+        No comments Yet...<a href="{% url 'add_comment' post.slug post.pk%}">Add Comment</a>
+    {% else %}
+        {% for comment in post.comments.all %}
+            <br>
+            <strong>
+                {{ comment.name }}
+                {{ comment.date_added }}
+            </strong>
+            <br>
+        {{ comment.body }}
+            <br>
+        {% endfor %}
+            <br>
+            <a href="{% url 'add_comment' post.slug post.pk%}">Add Comment</a>
+    {% endif %}
+    <hr>
     <br>
     <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
 {% endblock %}

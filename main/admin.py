@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Post
+from . models import Post, Comment
 
 admin.site.register(Post)
-#pass = djangotest
+admin.site.register(Comment)
