@@ -2,25 +2,23 @@
 {% block content %}
 <h1>Post</h1>
 <br>
-<ul>
+<div class="articles">
     {% for post in object_list %}
-    <li class="li-border">
-    <a href="{% url 'Selected-Website' post.slug post.pk %}"> {{ post.title }} </a> <br>
-    By {{ post.author }} <br>
+    <div class="article">
+    <h2><a href="{% url 'Selected-Website' post.slug post.pk %}"> {{ post.title }} </a> </h2>
     On {{ post.date }} <br>
         {% if user.is_authenticated %}
             {% if user.id == post.author.id %}
-                <button type="button" class="btn btn-outline-info nohover">
-                <a class="nohover" href="{% url 'Update-Website' post.slug post.pk %}">Edit</a>
+                <button type="button" class="btn btn-outline-info home-button">
+                <a href="{% url 'Update-Website' post.slug post.pk %}">Edit</a>
                 </button>
-                <button type="button" class="btn btn-outline-info nohover">
-                <a class="nohover" href="{% url 'Delete-Website' post.slug post.pk %}">Delete</a>
+                <button type="button" class="btn btn-outline-info home-button">
+                <a href="{% url 'Delete-Website' post.slug post.pk %}">Delete</a>
                 </button>
             {% endif %}
     {% endif %}
-    <br>
-    <br>
-    </li>
+    <p class="author">Added By {{ post.author }}</p>
+    </div>
 {% endfor %}
-</ul>
+</div>
 {% endblock %}

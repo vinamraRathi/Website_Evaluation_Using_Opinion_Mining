@@ -1,50 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
-    <br>
-    <br>
-    <h3>
-        <a href="{{ post.website_url }}"> {{ post.website_url }} </a>
-        <br>
-        <br>
-        By {{ post.author }} <br> <br>
-        Created on {{ post.date }} <br>
-    </h3>
+<div class="article-detail">
+<div class="article">
+    <h2>{{ post.title }}</h2> <p class="postdate">Created on {{ post.date }}</p>
+        <p class="p-2 posturl"><a href="{{ post.website_url }}">URL : {{ post.website_url }} </a></p>
+        <p class="author">By {{ post.author }}</p>
     <br>
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
-            <button type="button" class="btn btn-outline-info nohover">
-                <a class="nohover" href="{% url 'Update-Website' post.slug post.pk %}">Edit</a>
+            <button type="button" class="btn btn-outline-info site-form">
+                <a href="{% url 'Update-Website' post.slug post.pk %}">Edit</a>
             </button> &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-info nohover">
-                <a class="nohover" href="{% url 'Delete-Website' post.slug post.pk %}">Delete</a>
+            <button type="button" class="btn btn-outline-info site-form">
+                <a href="{% url 'Delete-Website' post.slug post.pk %}">Delete</a>
             </button>
             <br>
         {% endif %}
     {% else %}
         <h1>Error:404 Not Found! Please Log In</h1>
     {% endif %}
+</div>
     <hr>
     <br>
-    <h2>Comments...</h2>
+    <h1>Comments...</h1>
     {% if not post.comments.all %}
         No comments Yet...<a href="{% url 'add_comment' post.slug post.pk%}">Add Comment</a>
     {% else %}
         {% for comment in post.comments.all %}
             <br>
+            <p class="postcomment">
             <strong>
                 {{ comment.name }}
                 {{ comment.date_added }}
             </strong>
             <br>
-        {{ comment.body }}
-            <br>
+        {{ comment.body }}</p>
         {% endfor %}
-            <br>
             <a href="{% url 'add_comment' post.slug post.pk%}">Add Comment</a>
     {% endif %}
     <hr>
     <br>
     <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+</div>
 {% endblock %}

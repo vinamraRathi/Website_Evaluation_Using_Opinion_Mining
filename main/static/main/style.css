@@ -1,19 +1,156 @@
-a{
-    text-decoration: none;
-    color: red;
+body{
+    background-color: #0f121f;
+    background-image: url(stars.png);
+    background-repeat-y: no-repeat;
+    color: #fff;
 }
 
-li.li-border{
-    border: 2px solid aqua;
-    padding: 10px;
+body *{
+    font-family: Ubuntu;
+}
 
-    margin: 15px;
+a, a:hover, a:visited{
+    color: #fff;
+    text-decoration: none;
+}
+
+.wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+div.wrapper h1{
+    text-align: center;
+    margin: 100px auto;
+    font-size: 2.4em;
+}
+
+
+nav{
+    justify-self: end;
+}
+
+nav li{
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav button {
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    font-size: 1em;
+}
+
+.articles{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+
+.article{
+    padding: 10px;
+    border: 5px solid #00dba0;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.article .author{
+    padding: 10px;
+    background: #00dba0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    color: #0f121f;
+}
+
+.article-detail .article{
+    padding: 0;
+}
+
+.article-detail .article h2 {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 2em;
+}
+
+
+
+.site-form{
+    border: 3px solid #00dba0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.site-form input, .site-form textarea{
     display: block;
 }
 
-button.nohover{
-    width: 100px;
+a.highlight {
+    border: 1px solid #00dba0;
+    padding: 10px;
+    border-radius: 4px;
+    color: #00dba0;
 }
-button.btn-outline-info:hover{
-    background-color: transparent;
+
+.helptext, .helptext ul {
+    margin: 0 auto 20px;
+    color: #bbbbbb;
+    font-size: 0.9em;
+    display: block;
+}
+
+.errorlist li{
+    padding: 10px;
+    list-style-type: none;
+    border: 1px solid #ff5722;
+    color: #ff5722;
+    margin: 20px 0;
+}
+
+.errorlist {
+    padding: 0;
+}
+
+.site-form input[type="submit"]{
+    background: #00dba0;
+    border: 0;
+    color: #ffffff;
+    font-size: 1.2em;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.site-form input{
+    border: 0;
+    margin-bottom: 10px;
+}
+
+.home-button{
+    background: #00dba0;
+    border: 0;
+    color: #ffffff;
+    font-size: 1.2em;
+    border-radius: 4px;
+    margin: 10px 5px;
+}
+
+.posturl{
+    margin-left: 28%;
+    text-align: center;
+    font-size: 2em;
+    border: 2px solid #00dba0;
+    display: inline-block;
+}
+
+.postdate{
+    font-size: 1.2em;
+    text-align: end;
+}
+
+.postcomment{
+    border: 3px solid #00dba0;
+    padding: 10px;
 }
