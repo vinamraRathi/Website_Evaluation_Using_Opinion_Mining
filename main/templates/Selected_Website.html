@@ -22,6 +22,9 @@
     {% endif %}
 </div>
     <hr>
+    {% for rating in post.ratings.all %}
+    <h3>Rating(out of 5): {{rating.rating}}</h3>
+    {% endfor %}
     <br>
     <h1>Comments...</h1>
     {% if not post.comments.all %}
@@ -42,5 +45,8 @@
     <hr>
     <br>
     <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+</div>
+<div>
+    {{post.rating}}
 </div>
 {% endblock %}

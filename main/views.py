@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .models import Post, Comment, Rating, evaluate_website, set_website_Rating
+from .forms import PostForm, CommentForm, RatingForm
 from django.urls import reverse_lazy
+from django.http import JsonResponse
+from rest_framework.views import APIView
 
 
 class HomeView(ListView):
@@ -14,6 +18,12 @@ class HomeView(ListView):
 class WebsiteDetailView(DetailView):
     model = Post
     template_name = 'Selected_Website.html'
+
+    def get(self, request:HttpResponse, slug, pk):
+        if request.method == 'GET':
+            data2 = Comment.objects.values('post', 'body')
+            evaluate_website(data2, pk)
+        return super().get(request)
 
 
 class AddWebsiteView(CreateView):
@@ -49,3 +59,28 @@ class AddCommentView(CreateView):
         form.instance.name = self.request.user
         form.instance.post_id = self.kwargs['pk']
         return super().form_valid(form)
+
+class ShowRating(UpdateView):
+    model = Rating
+    form_class = RatingForm
+    template_name = 'show_rating.html'
+    fields = '__all__'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Rating, pk=self.kwargs.get('pk'))
+
+    def get(self, request:HttpResponse, slug, pk):
+        if request.method == 'GET':
+            return super().get(request)
+
+
+class call_model(APIView):
+    def get(self, request):
+        if request.method == 'GET':
+            data2 = Comment.objects.values('post', 'body')
+            print(data2)
+            data = set_website_Rating(data2)
+            for x in data:
+                r = Rating.objects.update_or_create(post_id = x[0], rating = x[1])
+                print(r)
+            return JsonResponse(data, safe=False)                

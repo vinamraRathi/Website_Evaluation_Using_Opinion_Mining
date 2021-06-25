@@ -1,5 +1,7 @@
 from django import forms
-from .models import Post, Comment
+from django.db.models import fields
+from django.forms import widgets
+from .models import Post, Comment, Rating
 
 
 class PostForm(forms.ModelForm):
@@ -20,4 +22,13 @@ class CommentForm(forms.ModelForm):
 
         widgets = {
             'body': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ('rating',)
+
+        widgets = {
+            'rating': forms.NumberInput(attrs={'class': 'form-control'}),
         }
